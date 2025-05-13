@@ -1,0 +1,30 @@
+services:
+  bot:
+    build: .
+    image: bot_flat_image
+    container_name: bot_flat_container
+    restart: always
+    environment:
+      - BOT_TOKEN=7617776250:AAHP55DEZnH8uz-05e0OkkX1etsDVYPZ13U
+      - DB_HOST=db  # Имя сервиса базы данных
+      - DB_PORT=5432
+      - DB_USER=nikitapomogalov
+      - DB_PASSWORD=n000ppp111
+      - DB_NAME=bot_flat
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: nikitapomogalov
+      POSTGRES_PASSWORD: n000ppp111
+      POSTGRES_DB: bot_flat
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
